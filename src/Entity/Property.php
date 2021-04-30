@@ -73,16 +73,25 @@ class Property
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $owner;
+    private $owner;    
 
     /**
-     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="property", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=Option::class, mappedBy="properties")
      */
-    private $ratings;
+    private $options;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Stay::class, mappedBy="property", orphanRemoval=true)
+     */
+    private $stays;
+
 
     public function __construct()
     {
-        $this->ratings = new ArrayCollection();
+        
+        $this->options = new ArrayCollection();
+        $this->stay = new ArrayCollection();
+        $this->stays = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,35 +229,62 @@ class Property
         $this->owner = $owner;
 
         return $this;
-    }
+    }    
 
     /**
-     * @return Collection|Rating[]
+     * @return Collection|Option[]
      */
-    public function getRatings(): Collection
+    public function getOptions(): Collection
     {
-        return $this->ratings;
+        return $this->options;
     }
 
-    public function addRating(Rating $rating): self
+    public function addOption(Option $option): self
     {
-        if (!$this->ratings->contains($rating)) {
-            $this->ratings[] = $rating;
-            $rating->setProperty($this);
+        if (!$this->options->contains($option)) {
+            $this->options[] = $option;
+            $option->addProperty($this);
         }
 
         return $this;
     }
 
-    public function removeRating(Rating $rating): self
+    public function removeOption(Option $option): self
     {
-        if ($this->ratings->removeElement($rating)) {
+        if ($this->options->removeElement($option)) {
+            $option->removeProperty($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stay[]
+     */
+    public function getStays(): Collection
+    {
+        return $this->stays;
+    }
+
+    public function addStay(Stay $stay): self
+    {
+        if (!$this->stays->contains($stay)) {
+            $this->stays[] = $stay;
+            $stay->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStay(Stay $stay): self
+    {
+        if ($this->stays->removeElement($stay)) {
             // set the owning side to null (unless already changed)
-            if ($rating->getProperty() === $this) {
-                $rating->setProperty(null);
+            if ($stay->getProperty() === $this) {
+                $stay->setProperty(null);
             }
         }
 
         return $this;
-    }
+    }     
 }

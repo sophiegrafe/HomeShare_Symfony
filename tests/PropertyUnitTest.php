@@ -3,7 +3,7 @@
 namespace App\Tests;
 
 use App\Entity\Property;
-use App\Entity\Rating;
+use App\Entity\Stay;
 use App\Entity\User;
 use DateTime;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ class PropertyUnitTest extends TestCase
     {
         $property = new Property();
         $datetime = new DateTime();
-        $rating = new Rating();
+        $stay = new Stay();
         $owner = new User();
 
 
@@ -30,7 +30,7 @@ class PropertyUnitTest extends TestCase
                  ->setSlug('slug')
                  ->setPhoto('/photo')
                  ->setOwner($owner)
-                 ->addRating($rating);
+                 ->addStay($stay);
 
         
         $this->assertTrue($property->getTitle() === 'Title');
@@ -44,14 +44,14 @@ class PropertyUnitTest extends TestCase
         $this->assertTrue($property->getSlug() === 'slug');
         $this->assertTrue($property->getPhoto() === '/photo');
         $this->assertTrue($property->getOwner() === $owner);
-        $this->assertContains($rating, $property->getRatings());
+        $this->assertContains($stay, $property->getStays());
     }
 
     public function testIsFalse()
     {
         $property = new Property();
         $datetime = new DateTime();
-        $rating = new Rating();
+        $stay = new Stay();
         $owner = new User();
 
 
@@ -66,7 +66,7 @@ class PropertyUnitTest extends TestCase
             ->setSlug('slug')
             ->setPhoto('/photo')
             ->setOwner($owner)
-            ->addRating($rating);
+            ->addStay($stay);
 
 
         $this->assertFalse($property->getTitle() === 'false');
@@ -80,7 +80,7 @@ class PropertyUnitTest extends TestCase
         $this->assertFalse($property->getSlug() === 'false');
         $this->assertFalse($property->getPhoto() === '/false');
         $this->assertFalse($property->getOwner() === new User);
-        $this->assertNotContains(new Rating(), $property->getRatings());
+        $this->assertNotContains(new Stay(), $property->getStays());
     }
 
     public function testIsEmpty()
@@ -99,6 +99,6 @@ class PropertyUnitTest extends TestCase
         $this->assertEmpty($property->getSlug());
         $this->assertEmpty($property->getPhoto());
         $this->assertEmpty($property->getOwner());
-        $this->assertEmpty($property->getRatings());
+        $this->assertEmpty($property->getStays());
     }
 }

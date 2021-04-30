@@ -59,12 +59,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Property::class, mappedBy="owner", orphanRemoval=true)
      */
-    private $properties;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="user")
-     */
-    private $ratings;
+    private $properties;    
 
     /**
      * @ORM\OneToMany(targetEntity=Blogpost::class, mappedBy="user")
@@ -76,12 +71,17 @@ class User implements UserInterface
      */
     private $coments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Stay::class, mappedBy="user")
+     */
+    private $stays;
+
     public function __construct()
     {
-        $this->properties = new ArrayCollection();
-        $this->ratings = new ArrayCollection();
+        $this->properties = new ArrayCollection();        
         $this->blogposts = new ArrayCollection();
         $this->coments = new ArrayCollection();
+        $this->stays = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,37 +241,7 @@ class User implements UserInterface
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection|Rating[]
-     */
-    public function getRatings(): Collection
-    {
-        return $this->ratings;
-    }
-
-    public function addRating(Rating $rating): self
-    {
-        if (!$this->ratings->contains($rating)) {
-            $this->ratings[] = $rating;
-            $rating->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRating(Rating $rating): self
-    {
-        if ($this->ratings->removeElement($rating)) {
-            // set the owning side to null (unless already changed)
-            if ($rating->getUser() === $this) {
-                $rating->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+    }   
 
     /**
      * @return Collection|Blogpost[]
@@ -327,6 +297,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($coment->getUser() === $this) {
                 $coment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stay[]
+     */
+    public function getStays(): Collection
+    {
+        return $this->stays;
+    }
+
+    public function addStay(Stay $stay): self
+    {
+        if (!$this->stays->contains($stay)) {
+            $this->stays[] = $stay;
+            $stay->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStay(Stay $stay): self
+    {
+        if ($this->stays->removeElement($stay)) {
+            // set the owning side to null (unless already changed)
+            if ($stay->getUser() === $this) {
+                $stay->setUser(null);
             }
         }
 
