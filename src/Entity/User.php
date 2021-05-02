@@ -59,7 +59,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Property::class, mappedBy="owner", orphanRemoval=true)
      */
-    private $properties;    
+    private $properties;
 
     /**
      * @ORM\OneToMany(targetEntity=Blogpost::class, mappedBy="user")

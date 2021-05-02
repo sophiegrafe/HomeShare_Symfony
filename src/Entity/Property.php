@@ -73,7 +73,7 @@ class Property
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $owner;    
+    private $owner;
 
     /**
      * @ORM\ManyToMany(targetEntity=Option::class, mappedBy="properties")
@@ -85,12 +85,17 @@ class Property
      */
     private $stays;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Address::class, inversedBy="property", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $address;
+
 
     public function __construct()
     {
         
-        $this->options = new ArrayCollection();
-        $this->stay = new ArrayCollection();
+        $this->options = new ArrayCollection();        
         $this->stays = new ArrayCollection();
     }
 
@@ -284,6 +289,18 @@ class Property
                 $stay->setProperty(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }     

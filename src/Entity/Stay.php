@@ -18,7 +18,7 @@ class Stay
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $startDate;
 
@@ -28,7 +28,7 @@ class Stay
     private $endDate;
 
     /**
-     * @ORM\Column(type="decimal", precision=2, scale=1)
+     * @ORM\Column(type="decimal", precision=2, scale=1, nullable=true)
      */
     private $score;
 

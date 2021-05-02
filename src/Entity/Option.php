@@ -23,7 +23,7 @@ class Option
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $libelle;
+    private $optionName;
 
     /**
      * @ORM\ManyToMany(targetEntity=Property::class, inversedBy="options")
@@ -40,14 +40,14 @@ class Option
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getOptionName(): ?string
     {
-        return $this->libelle;
+        return $this->optionName;
     }
 
-    public function setLibelle(string $libelle): self
+    public function setOptionName(string $optionName): self
     {
-        $this->libelle = $libelle;
+        $this->optionName = $optionName;
 
         return $this;
     }

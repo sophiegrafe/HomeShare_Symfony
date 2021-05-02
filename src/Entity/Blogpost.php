@@ -54,6 +54,12 @@ class Blogpost
      */
     private $coments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="blogposts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
     public function __construct()
     {
         $this->coments = new ArrayCollection();
@@ -162,6 +168,18 @@ class Blogpost
                 $coment->setBlogpost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
