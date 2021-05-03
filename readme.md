@@ -13,8 +13,9 @@ In order to focus on the technical part of the project, I will follow the specif
 * PHP 7.4
 * Composer
 * Symfony CLI
-* Docker
-* Docker-compose
+* //Docker
+* //Docker-compose
+* npm
   
 Vous pouvez vérifier les prérequis (sauf Docker et Docker-compose) avec la commande suivante (de la CLI Symfony)
 
@@ -24,7 +25,10 @@ symfony check:requirements
 ### Lancer l'environement de développement
 
 ```bash
-docker-compose up -d
+
+composer install
+npm install
+npm run build
 symfony server:start
 ```
 
