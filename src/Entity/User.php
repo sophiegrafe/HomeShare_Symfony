@@ -36,6 +36,9 @@ class User implements UserInterface
      */
     private $password;
 
+    // field for the app, no ORM needed
+    public $confirm_password;
+
     /**
      * @ORM\Column(type="string", length=128)
      */
@@ -144,6 +147,7 @@ class User implements UserInterface
 
         return $this;
     }
+    
 
     /**
      * Returning a salt is only needed, if you are not using a modern
