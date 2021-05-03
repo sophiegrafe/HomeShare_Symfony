@@ -20,6 +20,6 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.3",
         "@popperjs/core": "^2.9.2",        
-        "jquery": "^3.6.0"
+        "jquery": "^1.9.1"
     }
 }
