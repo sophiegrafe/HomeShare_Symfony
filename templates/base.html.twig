@@ -4,16 +4,10 @@
     <title>Realestate Bootstrap Theme</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% block stylesheets %}
-    {{
-      encore_entry_link_tags("app")
-    }}
-    {% endblock %}
+    {% include 'base/stylesheet.html.twig' %}
   </head>
   <body>
-    {% include 'base/nav.html.twig' %} {% block content %} {# page content #} {%
-    endblock %} {% include 'base/footer.html.twig' %} {% block javascripts %}
-    {{ encore_entry_script_tags("app") }}
-    {% endblock %}
+    {% include 'base/nav.html.twig' %} {% block content %} {% endblock %} {%
+    include 'base/footer.html.twig' %} {% include 'base/javascript.html.twig' %}
   </body>
 </html>
