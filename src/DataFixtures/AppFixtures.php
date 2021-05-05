@@ -128,7 +128,7 @@ class AppFixtures extends Fixture
                              ->setSlug($faker->slug())
                              ->setUser($user)
                              ->setCity($city);
-                    $manager->persist($blogpost);
+                    
 
                     // Generate a new user who will write a coment on the blogpost
                     $newUser = new User();
@@ -158,7 +158,10 @@ class AppFixtures extends Fixture
                           ->setCreatedDate(new DateTime())
                           ->setSlug($faker->slug())
                           ->setUser($user)
-                          ->setBlogpost($blogpost);                          
+                          ->setBlogpost($blogpost);
+                    
+                    $blogpost->addComent($coment);
+                    $manager->persist($blogpost);
                           
                     $coment->addReply($reply);
                     $manager->persist($coment);

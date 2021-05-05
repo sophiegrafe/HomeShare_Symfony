@@ -6,18 +6,16 @@ I will build a site allowing properties's owners to share their house or appartm
 
 In order to focus on the technical part of the project, I will follow the specifications sheet provided in an other course. 
 
-## Environement de développement (Docker/pour la prochaine fois)
+## Environement de développement
 
 ### Pré-requis
 
 * PHP 7.4
 * Composer
 * Symfony CLI
-* //Docker
-* //Docker-compose
 * npm
   
-Vous pouvez vérifier les prérequis (sauf Docker et Docker-compose) avec la commande suivante (de la CLI Symfony)
+Vous pouvez vérifier les prérequis avec la commande suivante (de la CLI Symfony)
 
 ```bash
 symfony check:requirements
@@ -27,9 +25,12 @@ symfony check:requirements
 ```bash
 
 composer install
-npm install
-npm run build
+symfony console doctrine:database:create
+symfony console make:migration
+symfony console doctrine:migration:migrate
+symfony console doctrine:fixtures:load
 symfony server:start
+
 ```
 
 ## Lancer les tests
