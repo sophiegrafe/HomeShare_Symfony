@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/home', name: 'home')]
     public function index(
         PropertyRepository $propertyRepository,
         BlogpostRepository $blogpostRepository): Response
@@ -47,13 +47,13 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/home/properties', name: 'properties')]
-    public function properties(): Response
-    {
-        return $this->render('home/properties/properties.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    // #[Route('/home/properties', name: 'properties')]
+    // public function properties(): Response
+    // {
+    //     return $this->render('home/properties/properties.html.twig', [
+    //         'controller_name' => 'HomeController',
+    //     ]);
+    // }
 
     #[Route('/home/contact', name: 'contact')]
     public function contact(): Response
