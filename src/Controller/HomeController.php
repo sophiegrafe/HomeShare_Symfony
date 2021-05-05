@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Blogpost;
+use App\Entity\Country;
+use App\Entity\City;
+use App\Repository\BlogpostRepository;
+//use App\Repository\CountryRepository;
+use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +15,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(): Response
-    {
+    public function index(
+        PropertyRepository $propertyRepository,
+        BlogpostRepository $blogpostRepository): Response
+    {   
+        $em = $this->getDoctrine()->getManager();
+        $countryRepository = $em->getRepository(Country::class);
+        $cityRepository = $em->getRepository(City::class);
+
         return $this->render('home/index/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'properties' => $propertyRepository->getLastTen(),
+            'blogposts' => $blogpostRepository->getLastFive(),
+            'countries' => $countryRepository->findAll(),
+            'cities' => $cityRepository->findAll(),
         ]);
     }
 
