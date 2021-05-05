@@ -41,6 +41,7 @@ class Address
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="Address")
      */
     private $city;
+    
 
     public function getId(): ?int
     {

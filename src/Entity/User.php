@@ -79,12 +79,26 @@ class User implements UserInterface
      */
     private $stays;
 
-    public function __construct()
+    // crée par nous mêmes, ainsi que le constructeur (vérifiez!)
+    public function hydrate(array $init)
     {
+        foreach ($init as $key => $value) {
+            $method = "set" . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
+
+    public function __construct($arrayInit = [])
+    {
+        
         $this->properties = new ArrayCollection();        
         $this->blogposts = new ArrayCollection();
         $this->coments = new ArrayCollection();
         $this->stays = new ArrayCollection();
+        // appel au hydrate
+        $this->hydrate($arrayInit);
     }
 
     public function getId(): ?int

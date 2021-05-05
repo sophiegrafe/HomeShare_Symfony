@@ -61,11 +61,25 @@ class Coment
      */
     private $replies;
 
-    public function __construct()
+    // crée par nous mêmes, ainsi que le constructeur (vérifiez!)
+    public function hydrate(array $init)
     {
-        $this->replies = new ArrayCollection();
+        foreach ($init as $key => $value) {
+            $method = "set" . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
     }
 
+    public function __construct($arrayInit = [])
+    {
+        $this->replies = new ArrayCollection();
+        // appel au hydrate
+        $this->hydrate($arrayInit);
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;

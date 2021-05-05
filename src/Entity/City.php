@@ -25,16 +25,6 @@ class City
     private $cityName;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=8, nullable=true)
-     */
-    private $latitude;
-
-    /**
-     * @ORM\Column(type="decimal", precision=11, scale=8, nullable=true)
-     */
-    private $longitude;
-
-    /**
      * @ORM\OneToMany(targetEntity=Address::class, mappedBy="city")
      */
     private $addresses;
@@ -50,11 +40,34 @@ class City
      */
     private $blogposts;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
+
+    // crée par nous mêmes, ainsi que le constructeur (vérifiez!)
+    public function hydrate(array $init)
+    {
+        foreach ($init as $key => $value) {
+            $method = "set" . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
+
+    public function __construct($arrayInit = [])
     {
         $this->addresses = new ArrayCollection();
         $this->blogposts = new ArrayCollection();
-    }
+        // appel au hydrate
+        $this->hydrate($arrayInit);
+    }    
 
     public function getId(): ?int
     {
@@ -69,30 +82,6 @@ class City
     public function setCityName(string $cityName): self
     {
         $this->cityName = $cityName;
-
-        return $this;
-    }
-
-    public function getLatitude(): ?string
-    {
-        return $this->latitude;
-    }
-
-    public function setLatitude(?string $latitude): self
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    public function getLongitude(): ?string
-    {
-        return $this->longitude;
-    }
-
-    public function setLongitude(?string $longitude): self
-    {
-        $this->longitude = $longitude;
 
         return $this;
     }
@@ -165,6 +154,30 @@ class City
                 $blogpost->setCity(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }
