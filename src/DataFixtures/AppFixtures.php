@@ -26,9 +26,9 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Using the factory to create a Faker\Generator instance
+        // Create a Faker\Generator instance
         $faker = Faker\Factory::create();
-        // to always get the same generated data
+        // Get the same set of data
         $faker->seed(42);
 
         // Generate users        
@@ -60,9 +60,9 @@ class AppFixtures extends Fixture
             $manager->persist($user);
             }  
         
-            //Generate Addresses, cities and countries
+        /*Generate Addresses, cities and countries, blogposts, properties, owner and coments ... to maintain relations in DB*/
         
-        // to maintain relation in DB
+        
         for ($i = 0; $i < 10; $i++){
             
             // Generate a country
@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
                      ->setCountry($country);
                 $manager->persist($city);
                 for ($k = 0; $k < 3; $k++) {
-                    // Generate 3 address for each city
+                    // Generate 3 addresses for each city
                     $address = new Address();
                     $faker->addProvider(new Faker\Provider\fr_FR\Address($faker));
                     $address->setNumber($faker->buildingNumber())
@@ -90,7 +90,7 @@ class AppFixtures extends Fixture
                         ->setCity($city);
                     $manager->persist($address);
 
-                    // Generate a user who own the property at that address
+                    // Generate an owner for the property at this address
                     $user = new User();
                     $user->setEmail($faker->email())
                          ->setFirstname($faker->firstName())
@@ -119,7 +119,7 @@ class AppFixtures extends Fixture
                              ->setAddress($address);
                     $manager->persist($property);
 
-                    // Generate a blogpost writed by the owner tha promote the place where the property is localize
+                    // Generate a blogpost wrote by the owner that promote the city where the property is located
                     $blogpost = new Blogpost();
                     $blogpost->setTitle($faker->words(10, true))
                              ->setContent($faker->text(1000))
