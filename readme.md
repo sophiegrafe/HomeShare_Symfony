@@ -32,7 +32,7 @@ symfony console doctrine:fixtures:load
 symfony server:start
 
 ```
-
+ 
 ## Lancer les tests
 
 ```bash

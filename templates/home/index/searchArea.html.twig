@@ -1,7 +1,7 @@
 <div class="banner-search">
   <div class="container">
     <!-- banner -->
-    <h3>Buy, Sale & Rent</h3>
+    <h3>Looking for something ?</h3>
     <div class="searchbar">
       <div class="row">
         <div class="col-lg-6 col-sm-6">
@@ -13,26 +13,33 @@
           <div class="row">
             <div class="col-lg-3 col-sm-3">
               <select class="form-control">
-                <option>Buy</option>
-                <option>Rent</option>
-                <option>Sale</option>
+                <option>Capacity</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
               </select>
             </div>
             <div class="col-lg-3 col-sm-4">
               <select class="form-control">
-                <option>Price</option>
-                <option>$150,000 - $200,000</option>
-                <option>$200,000 - $250,000</option>
-                <option>$250,000 - $300,000</option>
-                <option>$300,000 - above</option>
+                <option>City</option>
+                {% for city in cities %}
+                <option>{{ city.cityName }}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="col-lg-3 col-sm-4">
               <select class="form-control">
-                <option>Property</option>
-                <option>Apartment</option>
-                <option>Building</option>
-                <option>Office Space</option>
+                <option>Country</option>
+                {% for country in countries %}
+                <option>{{ country.countryName }}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="col-lg-3 col-sm-4">

@@ -19,6 +19,21 @@ class PropertyRepository extends ServiceEntityRepository
         parent::__construct($registry, Property::class);
     }
 
+    /**
+     * @return Property[] Returns an array of Property objects
+     */
+    
+    public function getLastTen()
+    {
+        return $this->createQueryBuilder('p')            
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(10)            
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
     // /**
     //  * @return Property[] Returns an array of Property objects
     //  */
