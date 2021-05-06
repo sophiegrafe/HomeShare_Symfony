@@ -2,7 +2,7 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
-    <span class="pull-right"><a href="#">Home</a> / Buy, Sale & Rent</span>
+    <span class="pull-right"><a href="#">Home</a> / Properties</span>
     <h2>Properties</h2>
   </div>
 </div>
@@ -148,7 +148,7 @@
           {% endfor %}
           <!-- properties -->
           <div class="center">
-            {% do properties.setPageRange(2) %}
+            {% do properties.setPageRange(3) %}
             {{ knp_pagination_render(properties, "base/pagination.html.twig") }}
           </div>
         </div>

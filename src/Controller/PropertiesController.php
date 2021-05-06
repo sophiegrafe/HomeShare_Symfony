@@ -22,7 +22,7 @@ class PropertiesController extends AbstractController
         Request $request
         ): Response
     {
-        $data = $propertyRepository->findAll();
+        $data = $propertyRepository->createQueryBuilder('p')->getQuery();
         $properties = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
