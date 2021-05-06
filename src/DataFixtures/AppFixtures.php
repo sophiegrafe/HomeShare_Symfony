@@ -27,24 +27,53 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // Create a Faker\Generator instance
-        $faker = Faker\Factory::create();
-        // Get the same set of data
-        $faker->seed(42);
+        $faker = Faker\Factory::create('fr_FR');
+        // Get the same set of data !!!!! ça n'a pas l'air de fonctionner :/
+        $faker->seed(1234);
 
-        // Generate users        
+        // Generate user with admin role       
             $user = new User();
 
-            $user->setEmail('user@test.com')
+            $user->setEmail('admin@test.com')
                  ->setFirstname($faker->firstName())
                  ->setLastname($faker->lastName())
                  ->setPseudo($faker->userName())
-                 ->setPhoneNumber($faker->phoneNumber());
+                 ->setPhoneNumber($faker->phoneNumber())
+                 ->setRoles(['ROLE_ADMIN']);
             // Generate a hashed password
             $password = $this->encoder->encodePassword($user, 'password');
             $user->setPassword($password);
-
             $manager->persist($user);
 
+            // Generate a user to test user_role
+            $user = new User();
+
+            $user->setEmail('user@test.com')
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPseudo($faker->userName())
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setRoles(['ROLE_USER']);
+            // Generate a hashed password
+            $password = $this->encoder->encodePassword($user, 'password');
+            $user->setPassword($password);
+            $manager->persist($user);
+
+            // Generate a owner to test owner_role  
+            $user = new User();
+
+            $user->setEmail('owner@test.com')
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPseudo($faker->userName())
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setRoles(['ROLE_USER']);
+            // Generate a hashed password
+            $password = $this->encoder->encodePassword($user, 'password');
+            $user->setPassword($password);
+            $manager->persist($user);
+
+            //Generate some users
             for ($i = 0; $i < 50; $i++) {
             $user = new User();
 
@@ -52,11 +81,11 @@ class AppFixtures extends Fixture
                  ->setFirstname($faker->firstName())
                  ->setLastname($faker->lastName())
                  ->setPseudo($faker->userName())
-                 ->setPhoneNumber($faker->phoneNumber());
+                 ->setPhoneNumber($faker->phoneNumber())
+                 ->setRoles(['ROLE_USER']);
             // Generate a hashed password
             $password = $this->encoder->encodePassword($user, 'password');
             $user->setPassword($password);
-
             $manager->persist($user);
             }  
         
@@ -96,7 +125,8 @@ class AppFixtures extends Fixture
                          ->setFirstname($faker->firstName())
                          ->setLastname($faker->lastName())
                          ->setPseudo($faker->userName())
-                         ->setPhoneNumber($faker->phoneNumber());
+                         ->setPhoneNumber($faker->phoneNumber())
+                         ->setRoles(['ROLE_USER', 'ROLE_OWNER']);
                     // Generate a hashed password
                     $password = $this->encoder->encodePassword($user, 'password');
                     $user->setPassword($password);
