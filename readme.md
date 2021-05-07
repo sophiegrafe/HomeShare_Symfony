@@ -38,3 +38,8 @@ symfony server:start
 ```bash
 php bin/phpunit --testdox
 ```
+## Vérifier la couverture de test
+
+```bash
+XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-html var/log/test/test-coverage
+```
