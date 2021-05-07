@@ -32,18 +32,18 @@ class AppFixtures extends Fixture
         $faker->seed(1234);
 
         // Generate user with admin role       
-            $user = new User();
+            $admin = new User();
 
-            $user->setEmail('admin@test.com')
+        $admin->setEmail('admin@test.com')
                  ->setFirstname($faker->firstName())
                  ->setLastname($faker->lastName())
                  ->setPseudo($faker->userName())
                  ->setPhoneNumber($faker->phoneNumber())
                  ->setRoles(['ROLE_ADMIN']);
             // Generate a hashed password
-            $password = $this->encoder->encodePassword($user, 'password');
-            $user->setPassword($password);
-            $manager->persist($user);
+            $password = $this->encoder->encodePassword($admin, 'password');
+            $admin->setPassword($password);
+            $manager->persist($admin);
 
             // Generate a user to test user_role
             $user = new User();
@@ -60,18 +60,18 @@ class AppFixtures extends Fixture
             $manager->persist($user);
 
             // Generate a owner to test owner_role  
-            $user = new User();
+            $owner = new User();
 
-            $user->setEmail('owner@test.com')
+            $owner->setEmail('owner@test.com')
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setPseudo($faker->userName())
                 ->setPhoneNumber($faker->phoneNumber())
                 ->setRoles(['ROLE_USER']);
             // Generate a hashed password
-            $password = $this->encoder->encodePassword($user, 'password');
-            $user->setPassword($password);
-            $manager->persist($user);
+            $password = $this->encoder->encodePassword($owner, 'password');
+            $owner->setPassword($password);
+            $manager->persist($owner);
 
             //Generate some users
             for ($i = 0; $i < 50; $i++) {
@@ -120,18 +120,18 @@ class AppFixtures extends Fixture
                     $manager->persist($address);
 
                     // Generate an owner for the property at this address
-                    $user = new User();
-                    $user->setEmail($faker->email())
+                    $owner = new User();
+                    $owner->setEmail($faker->email())
                          ->setFirstname($faker->firstName())
                          ->setLastname($faker->lastName())
                          ->setPseudo($faker->userName())
                          ->setPhoneNumber($faker->phoneNumber())
                          ->setRoles(['ROLE_USER', 'ROLE_OWNER']);
                     // Generate a hashed password
-                    $password = $this->encoder->encodePassword($user, 'password');
-                    $user->setPassword($password);
+                    $password = $this->encoder->encodePassword($owner, 'password');
+                    $owner->setPassword($password);
 
-                    $manager->persist($user);                
+                    $manager->persist($owner);                
 
                     // Generate a property
                     $property = new Property();
@@ -145,20 +145,19 @@ class AppFixtures extends Fixture
                              ->setIsEnable($faker->boolean(50))
                              ->setCreatedDate($faker->dateTimeBetween('-2 years', 'now'))
                              ->setSlug($faker->slug())
-                             ->setOwner($user)
+                             ->setOwner($owner)
                              ->setAddress($address);
                     $manager->persist($property);
 
-                    // Generate a blogpost wrote by the owner that promote the city where the property is located
+                    // Generate a blogpost wrote by a owner that promote the city where the property is located
                     $blogpost = new Blogpost();
                     $blogpost->setTitle($faker->words(10, true))
                              ->setContent($faker->text(1000))
                              ->setPhoto($faker->imageUrl(640, 480, 'city', true, 'capital'))
                              ->setCreatedDate($faker->dateTimeBetween('-1 day', 'now'))
                              ->setSlug($faker->slug())
-                             ->setUser($user)
-                             ->setCity($city);
-                    
+                             ->setUser($owner)
+                             ->setCity($city);                    
 
                     // Generate a new user who will write a coment on the blogpost
                     $newUser = new User();
@@ -187,7 +186,7 @@ class AppFixtures extends Fixture
                           ->setContent($faker->text(250))
                           ->setCreatedDate(new DateTime())
                           ->setSlug($faker->slug())
-                          ->setUser($user)
+                          ->setUser($owner)
                           ->setBlogpost($blogpost);
                     
                     $blogpost->addComent($coment);
