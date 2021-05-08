@@ -6,9 +6,12 @@ use App\Repository\PropertyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
+ * @Vich\Uploadable
  */
 class Property
 {
@@ -69,6 +72,12 @@ class Property
      */
     private $photo;
 
+
+    /**
+     * @Vich\UploadableField(mapping="property_photo", fileNameProperty="photo")
+     * @var File
+     */
+    private $photoFile;
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")
      * @ORM\JoinColumn(nullable=false)
@@ -236,6 +245,26 @@ class Property
 
         return $this;
     }
+
+    public function setPhotoFile(File $photo = null)
+    {
+        $this->photoFile = $photo;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($photo) {
+            // if 'updatedAt' (here 'createdDate') is not defined in your entity, use another property
+            $this->createdDate = new \DateTime('now');
+        }
+    }
+
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+
 
     public function getOwner(): ?User
     {

@@ -1,0 +1,13 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+       property_photos:
+           uri_prefix: '%property_photos%'
+           upload_destination: '%kernel.project_dir%/public/images%property_photos%'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+        # usefull on small project to retrieve losted files but not here  
+        #    delete:_on_update: false
+        #    delete:_on_remove: false
+

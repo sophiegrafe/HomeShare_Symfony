@@ -6,6 +6,7 @@ use App\Entity\Blogpost;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -35,13 +36,15 @@ class BlogpostCrudController extends AbstractCrudController
         return [
             TextField::new('title'),
             // to see the slug on the board but not in the form
-            TextField::new('slug')->hideOnForm(),            
+            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),            
             TextareaField::new('content'),
             DateField::new('createdDate')->hideOnForm(),
 
-            // this one is problematic, need some time to read the doc and figure it out
-            // need to set the city in crud but need a prior traitement to allow a string in 'create new blogpost' then persiste the id attach to the string in City table.
-            AssociationField::new('city')->hideOnForm(),
+            /* this one is problematic, need some time to read the doc and figure it out
+            need to set the city in crud but need a prior traitement to allow a string in 'create new blogpost' then persiste the id attach to the string in City table.
+            --> SOLUTION !!! --> add a magic function in the associate entity __toString () wich return a string like the name, title, label, etc of this entity.  
+            */
+            AssociationField::new('city'),
         ];
     }
 
