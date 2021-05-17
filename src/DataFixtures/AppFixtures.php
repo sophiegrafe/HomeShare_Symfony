@@ -109,7 +109,7 @@ class AppFixtures extends Fixture
                      ->setLongitude($faker->longitude())
                      ->setCountry($country);
                 $manager->persist($city);
-                for ($k = 0; $k < 3; $k++) {
+                for ($k = 0; $k < 3; $k++) {                    
                     // Generate 3 addresses for each city
                     $address = new Address();
                     $faker->addProvider(new Faker\Provider\fr_FR\Address($faker));
@@ -138,7 +138,7 @@ class AppFixtures extends Fixture
                     $property->setTitle($faker->words(10, true))
                              ->setShortDescription($faker->paragraph())
                              ->setLongDescription($faker->text())
-                             ->setPhoto($faker->imageUrl(640, 480, 'house', true, 'tiny'))
+                             ->setPhoto('assets/img/properties/tiny-house-'.(string)$k.'.jpg')
                              ->setCapacity($faker->numberBetween(1,15))
                              ->setNbBathroom($faker->numberBetween(1, 10))
                              ->setNbWc($faker->numberBetween(1, 5))
