@@ -74,13 +74,14 @@ class Property
 
 
     /**
-     * @Vich\UploadableField(mapping="property_photo", fileNameProperty="photo")
+     * @Vich\UploadableField(mapping="property_photos", fileNameProperty="photo")
      * @var File
      */
     private $photoFile;
+
+
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="properties")     
      */
     private $owner;
 
@@ -246,6 +247,11 @@ class Property
         return $this;
     }
 
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+    
     public function setPhotoFile(File $photo = null)
     {
         $this->photoFile = $photo;
@@ -258,13 +264,6 @@ class Property
             $this->createdDate = new \DateTime('now');
         }
     }
-
-    public function getPhotoFile()
-    {
-        return $this->photoFile;
-    }
-
-
 
     public function getOwner(): ?User
     {

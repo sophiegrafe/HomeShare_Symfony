@@ -6,9 +6,14 @@ use App\Repository\BlogpostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
+
 
 /**
  * @ORM\Entity(repositoryClass=BlogpostRepository::class)
+ * @Vich\Uploadable
  */
 class Blogpost
 {
@@ -33,6 +38,12 @@ class Blogpost
      * @ORM\Column(type="string", length=255)
      */
     private $photo;
+
+    /**
+     * @Vich\UploadableField(mapping="blogpost_photos", fileNameProperty="photo")
+     * @var File
+     */
+    private $photoFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -115,6 +126,24 @@ class Blogpost
         $this->photo = $photo;
 
         return $this;
+    }
+
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    public function setPhotoFile(File $photo = null)
+    {
+        $this->photoFile = $photo;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($photo) {
+            // if 'updatedAt' (here 'createdDate') is not defined in your entity, use another property
+            $this->createdDate = new \DateTime('now');
+        }
     }
 
     public function getSlug(): ?string

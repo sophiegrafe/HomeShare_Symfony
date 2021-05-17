@@ -183,7 +183,7 @@ class City
     }
 
     public function __toString()
-    {
+    { 
         return $this->cityName;
     }
 }
