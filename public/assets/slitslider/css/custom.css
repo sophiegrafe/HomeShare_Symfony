@@ -166,19 +166,19 @@
 /* Content elements */
 
 .bg-img-1 {
-  background-image: url("../../img/slider/1.jpg");
+  background-image: url("../../img/slider/tiny-house-1.jpg");
 }
 .bg-img-2 {
-  background-image: url("../../img/slider/2.jpg");
+  background-image: url("../../img/slider/tiny-house-2.jpg");
 }
 .bg-img-3 {
-  background-image: url(../../img/slider/3.jpg);
+  background-image: url(../../img/slider/tiny-house-3.jpg);
 }
 .bg-img-4 {
-  background-image: url(../../img/slider/4.jpg);
+  background-image: url(../../img/slider/tiny-house-4.jpg);
 }
 .bg-img-5 {
-  background-image: url(../../img/slider/5.jpg);
+  background-image: url(../../img/slider/tiny-house-5.jpg);
 }
 
 /* Animations for content elements */

@@ -4,14 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\Blogpost;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class BlogpostCrudController extends AbstractCrudController
 {
@@ -23,26 +23,20 @@ class BlogpostCrudController extends AbstractCrudController
     //customize the form area and the board
     public function configureFields(string $pageName): iterable
     {
-        // return [
-        //     Field::new('title'),
-        //     // to see the slug on the board but not in the form
-        //     Field::new('slug')->hideOnForm(),
-        //     Field::new('content'),
-        //     Field::new('createdDate')->hideOnForm(),
-
-        //     //this one is problematic, need some time to read the doc and figure it out
-        //     Field::new('city'),
-        // ];
+        
         return [
             TextField::new('title'),
             // to see the slug on the board but not in the form
-            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),            
             TextareaField::new('content'),
+            TextField::new('photoFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            //this field set the miniarture on the Blogpost board
+            ImageField::new('photo')->setBasePath('/uploads/blogposts/')->onlyOnIndex(),
+            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),            
             DateField::new('createdDate')->hideOnForm(),
+            AssociationField::new('user')->hideOnForm(),
 
-            /* this one is problematic, need some time to read the doc and figure it out
-            need to set the city in crud but need a prior traitement to allow a string in 'create new blogpost' then persiste the id attach to the string in City table.
-            --> SOLUTION !!! --> add a magic function in the associate entity __toString () wich return a string like the name, title, label, etc of this entity.  
+            /* this one is problematic, need to set the city in crud but need a prior traitement to allow a string in 'create new blogpost' then persiste the id attach to the string in City table.
+            --> SOLUTION !!! --> add a magic function in the associate entity __toString () wich return a string, for exemples the name, title, label, etc, of this entity.  
             */
             AssociationField::new('city'),
         ];
