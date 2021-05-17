@@ -138,7 +138,7 @@ class AppFixtures extends Fixture
                     $property->setTitle($faker->words(10, true))
                              ->setShortDescription($faker->paragraph())
                              ->setLongDescription($faker->text())
-                             ->setPhoto('assets/img/properties/tiny-house-'.(string)$k.'.jpg')
+                             ->setPhoto('assets/img/properties/tiny-house-'.(string)($k + 1).'.jpg')
                              ->setCapacity($faker->numberBetween(1,15))
                              ->setNbBathroom($faker->numberBetween(1, 10))
                              ->setNbWc($faker->numberBetween(1, 5))
