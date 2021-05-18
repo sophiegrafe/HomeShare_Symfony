@@ -19,11 +19,11 @@ class SearchFormType extends AbstractType
     {
 
         $builder
-            // ->add(
-            // 'capacity',
-            // NumberType::class,
-            // ['required' => false]
-            //  )
+            ->add(
+            'capacity',
+            NumberType::class,
+            ['required' => false]
+             )
 
             ->add(
             'country',

@@ -69,7 +69,7 @@
         </div>
         <div class="row">
           <!-- properties -->
-          {% for property in propertiesResult %}
+          {% for property in tinyHomeResult %}
           <div class="col-lg-4 col-sm-6">
             <div class="properties">
               <div class="image-holder">
@@ -99,15 +99,14 @@
           {% endfor %}
           <!-- properties -->
 
+          {#
           <div class="center">
-            {% do propertiesResult.setPageRange(2) %}
+            {% do tinyHomeResult.setPageRange(2) %}
             {{
-              knp_pagination_render(
-                propertiesResult,
-                "base/pagination.html.twig"
-              )
+              knp_pagination_render(tinyHomeResult, "base/pagination.html.twig")
             }}
           </div>
+          #}
         </div>
       </div>
     </div>

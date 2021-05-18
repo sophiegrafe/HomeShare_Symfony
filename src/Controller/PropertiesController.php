@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Form\SearchFormType;
-use App\Repository\CityRepository;
-use App\Repository\CountryRepository;
 use App\Repository\PropertyRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,9 +15,7 @@ class PropertiesController extends AbstractController
 {
     #[Route('/properties', name: 'properties')]
     public function properties(
-        PropertyRepository $propertyRepository,
-        CountryRepository $countryRepository,
-        CityRepository $cityRepository,
+        PropertyRepository $res,        
         PaginatorInterface $paginator,
         Request $request
         ): Response
@@ -32,19 +28,19 @@ class PropertiesController extends AbstractController
         $data->numeroPage = $request->get('page', 1);
         $form->handleRequest($request);
 
-        $propertiesResult = [];
+        $tinyHomeResult = [];
 
         if ($form->isSubmitted()) {
             //if submited -> return search results
-            $propertiesResult = $propertyRepository->getSearchResult($data);
+            $tinyHomeResult = $res->getTinyHomeSearchResult($data);
         } else {
             //if not submited -> return all properties
-            $propertiesResult = $propertyRepository->findAll();
+            $tinyHomeResult = $res->findAll();
         }
         
         return $this->render('properties/properties.html.twig', [
             'form' => $form->createView(),
-            'propertiesResult' => $propertiesResult
+            'tinyHomeResult' => $tinyHomeResult
         ]);
     }
 }

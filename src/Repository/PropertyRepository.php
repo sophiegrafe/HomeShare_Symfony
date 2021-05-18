@@ -38,14 +38,11 @@ class PropertyRepository extends ServiceEntityRepository
         ;
     }
 
-    /**
-     * @return Property[] Returns an array of Property objects
-     */
-
-    public function getSearchResult(SearchData $data)
+    
+    public function getTinyHomeSearchResult(SearchData $data)
     {
         $isEnable = true;
-        $query = $this->createQueryBuilder('p')
+        $reqQB = $this->createQueryBuilder('p')
             ->select(                
                 'p.isEnable',
                 'p.photo',
@@ -59,20 +56,20 @@ class PropertyRepository extends ServiceEntityRepository
             ->join('p.country', 'country');
 
         if(!empty($data->country)){
-            $query =$query->andWhere('p.country = :country')            
+            $reqQB =$reqQB->andWhere('p.country = :country')            
             ->setParameter('country', $data->country);
         }
 
         if (!empty($data->city)) {
-            $query = $query->andWhere('p.city = :city')
+            $reqQB = $reqQB->andWhere('p.city = :city')
             ->setParameter('city', $data->city);
         }
 
-        $query = $query->andWhere('p.isEnable = :isEnable')
+        $reqQB = $reqQB->andWhere('p.isEnable = :isEnable')
         ->setParameter('isEnable', $isEnable);
                 
-        $result =  $query->getQuery();
-        // pourquoi pas $result =  $query->getResult();
+        $result =  $reqQB->getQuery();
+        // pourquoi pas $result =  $reqQB->getResult();
 
         return $this->paginator->paginate(
             $result,
