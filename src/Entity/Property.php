@@ -101,6 +101,18 @@ class Property
      */
     private $address;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Country::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $country;
+
     // crée par nous mêmes, ainsi que le constructeur (vérifiez!)
     public function hydrate(array $init)
     {
@@ -342,6 +354,30 @@ class Property
     public function setAddress(Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }     

@@ -1,57 +1,35 @@
 <div class="banner-search">
   <div class="container">
-    <!-- banner -->
+    <!-- banner search-->
     <h3>Looking for something ?</h3>
+    <!-- search area-->
     <div class="searchbar">
       <div class="row">
         <div class="col-lg-6 col-sm-6">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search of Properties"
-          />
+          {{
+            form_start(form, {
+              action: path("home"),
+              method: "GET",
+              attr: { id: "ajaxStart" }
+            })
+          }}
           <div class="row">
             <div class="col-lg-3 col-sm-3">
-              <select class="form-control">
-                <option>Capacity</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-              </select>
+              {{ form_row(form.capacity, {'attr': {'class': 'form-control'}}) }}
             </div>
             <div class="col-lg-3 col-sm-4">
-              <select class="form-control">
-                <option>City</option>
-                {% for city in cities %}
-                <option>{{ city.cityName }}</option>
-                {% endfor %}
-              </select>
+              {{ form_row(form.country, {'attr': {'class': 'form-control'}}) }}
             </div>
             <div class="col-lg-3 col-sm-4">
-              <select class="form-control">
-                <option>Country</option>
-                {% for country in countries %}
-                <option>{{ country.countryName }}</option>
-                {% endfor %}
-              </select>
+              {{ form_row(form.city, {'attr': {'class': 'form-control'}}) }}
             </div>
+            <br />
             <div class="col-lg-3 col-sm-4">
-              <button
-                class="btn btn-success"
-                onclick="window.location.href='buysalerent.php'"
-              >
-                Find Now
-              </button>
+              <button class="btn btn-success">Find Now</button>
             </div>
           </div>
         </div>
+        {{ form_end(form) }}
         <div class="col-lg-5 col-lg-offset-1 col-sm-6">
           <p>Join now and get updated with all the properties deals.</p>
           <button

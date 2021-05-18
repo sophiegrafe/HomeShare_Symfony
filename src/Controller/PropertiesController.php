@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
+use App\Form\SearchFormType;
 use App\Repository\CityRepository;
 use App\Repository\CountryRepository;
 use App\Repository\PropertyRepository;
@@ -22,16 +24,27 @@ class PropertiesController extends AbstractController
         Request $request
         ): Response
     {
-        $data = $propertyRepository->createQueryBuilder('p')->getQuery();
-        $properties = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            12
+        $data = new SearchData();
+        $form = $this->createForm(
+            SearchFormType::class,
+            $data
         );
+        $data->numeroPage = $request->get('page', 1);
+        $form->handleRequest($request);
+
+        $propertiesResult = [];
+
+        if ($form->isSubmitted()) {
+            //if submited -> return search results
+            $propertiesResult = $propertyRepository->getSearchResult($data);
+        } else {
+            //if not submited -> return all properties
+            $propertiesResult = $propertyRepository->findAll();
+        }
+        
         return $this->render('properties/properties.html.twig', [
-            'properties' => $properties,
-            'countries' => $countryRepository->findAll(),
-            'cities' => $cityRepository->findAll(),
+            'form' => $form->createView(),
+            'propertiesResult' => $propertiesResult
         ]);
     }
 }

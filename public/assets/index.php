@@ -109,23 +109,22 @@
               </select>
             </div>
             <div class="col-lg-3 col-sm-4">
-            <select class="form-control">
+              <select class="form-control">
                 <option>Property</option>
                 <option>Apartment</option>
                 <option>Building</option>
                 <option>Office Space</option>
               </select>
-              </div>
-              <div class="col-lg-3 col-sm-4">
+            </div>
+            <div class="col-lg-3 col-sm-4">
               <button class="btn btn-success"  onclick="window.location.href='buysalerent.php'">Find Now</button>
-              </div>
-          </div>
-          
-          
+            </div>
+          </div>   
         </div>
         <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
           <p>Join now and get updated with all the properties deals.</p>
-          <button class="btn btn-info"   data-toggle="modal" data-target="#loginpop">Login</button>        </div>
+          <button class="btn btn-info"   data-toggle="modal" data-target="#loginpop">Login</button>       
+        </div>
       </div>
     </div>
   </div>

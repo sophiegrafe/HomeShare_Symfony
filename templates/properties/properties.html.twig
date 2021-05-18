@@ -7,43 +7,11 @@
   </div>
 </div>
 <!-- banner -->
-
 <div class="container">
   <div class="properties-listing spacer">
     <div class="row">
       <div class="col-lg-3 col-sm-4">
-        <div class="search-form">
-          <h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search of Properties"
-          />
-          <div class="row">
-            <div class="col-lg-5">
-              <select class="form-control"></select>
-            </div>
-            <div class="col-lg-7">
-              <select class="form-control">
-                <option>City</option>
-                {% for city in cities %}
-                <option>{{ city.cityName }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12">
-              <select class="form-control">
-                {% for country in countries %}
-                <option>{{ country.countryName }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-          <button class="btn btn-primary">Find Now</button>
-        </div>
+        {% include 'properties/properties-search-area.html.twig' %}
 
         <div class="hot-properties hidden-xs">
           <h4>Hot Properties</h4>
@@ -101,7 +69,7 @@
         </div>
         <div class="row">
           <!-- properties -->
-          {% for property in properties %}
+          {% for property in propertiesResult %}
           <div class="col-lg-4 col-sm-6">
             <div class="properties">
               <div class="image-holder">
@@ -117,39 +85,28 @@
               </h4>
               <p class="capacity">{{ property.capacity }} pers.</p>
               <div class="listing-detail">
-                <span
+                {% for i in 0..4 %}<span
                   data-toggle="tooltip"
                   data-placement="bottom"
-                  data-original-title="Bed Room"
-                  >5</span
+                  data-original-title="option"
+                  >{{ i }}</span
                 >
-                <span
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  data-original-title="Living Room"
-                  >2</span
-                >
-                <span
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  data-original-title="Parking"
-                  >2</span
-                >
-                <span
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  data-original-title="Kitchen"
-                  >1</span
-                >
+                {% endfor %}
               </div>
               <a class="btn btn-primary" href="#">View Details</a>
             </div>
           </div>
           {% endfor %}
           <!-- properties -->
+
           <div class="center">
-            {% do properties.setPageRange(3) %}
-            {{ knp_pagination_render(properties, "base/pagination.html.twig") }}
+            {% do propertiesResult.setPageRange(2) %}
+            {{
+              knp_pagination_render(
+                propertiesResult,
+                "base/pagination.html.twig"
+              )
+            }}
           </div>
         </div>
       </div>

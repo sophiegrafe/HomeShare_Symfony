@@ -13,6 +13,7 @@ use App\Entity\Property;
 use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use PHPUnit\Framework\Constraint\Count;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -30,15 +31,71 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
         // Get the same set of data !!!!! ça n'a pas l'air de fonctionner :/
         $faker->seed(1234);
+        
+
+        $country0 = new Country();
+        $country0->setCountryName('Belgium');        
+        $country1 = new Country();
+        $country1->setCountryName('France');
+        $country2 = new Country();
+        $country2->setCountryName('Italie');
+        $country3 = new Country();
+        $country3->setCountryName('Espagne');
+        $country4 = new Country();
+        $country4->setCountryName('Luxembourg');
+        $country5 = new Country();
+        $country5->setCountryName('Pays-bas');
+        $country6 = new Country();
+        $country6->setCountryName('Ireland');
+
+        $manager->persist($country0);
+        $manager->persist($country1);
+        $manager->persist($country2);
+        $manager->persist($country3);
+        $manager->persist($country4);
+        $manager->persist($country5);
+        $manager->persist($country6);
+
+        $city0 = new City();
+        $city0->setCityName('Brussel');
+        $city0->setCountry($country0);
+        $city1 = new City();
+        $city1->setCityName('Paris');
+        $city1->setCountry($country1);
+        $city2 = new City();
+        $city2->setCityName('Rome');
+        $city2->setCountry($country2);
+        $city3 = new City();
+        $city3->setCountry($country3);
+        $city3->setCityName('Madrid');
+        $city4 = new City();
+        $city4->setCountry($country4);
+        $city4->setCityName('Luxembourg');
+        $city5 = new City();
+        $city5->setCountry($country5);
+        $city5->setCityName('Amsterdam');
+        $city6 = new City();
+        $city6->setCountry($country6);
+        $city6->setCityName('Belfast');
+
+        $manager->persist($city0);
+        $manager->persist($city1);
+        $manager->persist($city2);
+        $manager->persist($city3);
+        $manager->persist($city4);
+        $manager->persist($city5);
+        $manager->persist($city6);
 
         // Generate user with admin role       
-            $admin = new User();
+        $admin = new User();
 
         $admin->setEmail('admin@test.com')
                  ->setFirstname($faker->firstName())
                  ->setLastname($faker->lastName())
                  ->setPseudo($faker->userName())
                  ->setPhoneNumber($faker->phoneNumber())
+                 ->setCity($city0)
+                 ->setCountry($country0)
                  ->setRoles(['ROLE_ADMIN']);
             // Generate a hashed password
             $password = $this->encoder->encodePassword($admin, 'password');
@@ -52,6 +109,8 @@ class AppFixtures extends Fixture
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setPseudo($faker->userName())
+                ->setCity($city0)
+                ->setCountry($country0)
                 ->setPhoneNumber($faker->phoneNumber())
                 ->setRoles(['ROLE_USER']);
             // Generate a hashed password
@@ -66,6 +125,8 @@ class AppFixtures extends Fixture
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setPseudo($faker->userName())
+                ->setCity($city0)
+                ->setCountry($country0)
                 ->setPhoneNumber($faker->phoneNumber())
                 ->setRoles(['ROLE_USER']);
             // Generate a hashed password
@@ -74,20 +135,90 @@ class AppFixtures extends Fixture
             $manager->persist($owner);
 
             //Generate some users
-            for ($i = 0; $i < 50; $i++) {
+            for ($i = 0; $i < 10; $i++) {
             $user = new User();
 
             $user->setEmail($faker->email())
                  ->setFirstname($faker->firstName())
                  ->setLastname($faker->lastName())
                  ->setPseudo($faker->userName())
+                 ->setCity($city2)
+                 ->setCountry($country2)
                  ->setPhoneNumber($faker->phoneNumber())
                  ->setRoles(['ROLE_USER']);
             // Generate a hashed password
             $password = $this->encoder->encodePassword($user, 'password');
             $user->setPassword($password);
             $manager->persist($user);
-            }  
+            }
+        //Generate some users
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+
+            $user->setEmail($faker->email())
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPseudo($faker->userName())
+                ->setCity($city3)
+                ->setCountry($country3)
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setRoles(['ROLE_USER']);
+            // Generate a hashed password
+            $password = $this->encoder->encodePassword($user, 'password');
+            $user->setPassword($password);
+            $manager->persist($user);
+        }
+        //Generate some users
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+
+            $user->setEmail($faker->email())
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPseudo($faker->userName())
+                ->setCity($city4)
+                ->setCountry($country4)
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setRoles(['ROLE_USER']);
+            // Generate a hashed password
+            $password = $this->encoder->encodePassword($user, 'password');
+            $user->setPassword($password);
+            $manager->persist($user);
+        }
+        //Generate some users
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+
+            $user->setEmail($faker->email())
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPseudo($faker->userName())
+                ->setCity($city5)
+                ->setCountry($country5)
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setRoles(['ROLE_USER']);
+            // Generate a hashed password
+            $password = $this->encoder->encodePassword($user, 'password');
+            $user->setPassword($password);
+            $manager->persist($user);
+        }
+        //Generate some users
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+
+            $user->setEmail($faker->email())
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPseudo($faker->userName())
+                ->setCity($city6)
+                ->setCountry($country6)
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setRoles(['ROLE_USER']);
+            // Generate a hashed password
+            $password = $this->encoder->encodePassword($user, 'password');
+            $user->setPassword($password);
+            $manager->persist($user);
+        } 
         
         /*Generate Addresses, cities and countries, blogposts, properties, owner and coments ... to maintain relations in DB*/
         
@@ -116,7 +247,8 @@ class AppFixtures extends Fixture
                     $address->setNumber($faker->buildingNumber())
                         ->setStreet($faker->streetName())
                         ->setZipcode($faker->postcode())
-                        ->setCity($city);
+                        ->setCity($city)
+                        ->setCountry($country);
                     $manager->persist($address);
 
                     // Generate an owner for the property at this address
@@ -125,6 +257,8 @@ class AppFixtures extends Fixture
                          ->setFirstname($faker->firstName())
                          ->setLastname($faker->lastName())
                          ->setPseudo($faker->userName())
+                         ->setCity($city)
+                         ->setCountry($country)
                          ->setPhoneNumber($faker->phoneNumber())
                          ->setRoles(['ROLE_USER', 'ROLE_OWNER']);
                     // Generate a hashed password
@@ -146,6 +280,8 @@ class AppFixtures extends Fixture
                              ->setCreatedDate($faker->dateTimeBetween('-2 years', 'now'))
                              ->setSlug($faker->slug())
                              ->setOwner($owner)
+                             ->setCity($city)
+                             ->setCountry($country)
                              ->setAddress($address);
                     $manager->persist($property);
 
@@ -164,6 +300,8 @@ class AppFixtures extends Fixture
                     $newUser->setEmail($faker->email())
                             ->setFirstname($faker->firstName())
                             ->setLastname($faker->lastName())
+                            ->setCity($city)
+                            ->setCountry($country)
                             ->setPseudo($faker->userName())
                             ->setPhoneNumber($faker->phoneNumber());
                     // Generate a hashed password
@@ -197,7 +335,7 @@ class AppFixtures extends Fixture
                     $manager->persist($reply);                           
                 }                
             }            
-        }      
+        }    
 
         $manager->flush();
     }
