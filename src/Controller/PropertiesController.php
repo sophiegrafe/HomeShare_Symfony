@@ -43,4 +43,9 @@ class PropertiesController extends AbstractController
             'tinyHomeResult' => $tinyHomeResult
         ]);
     }
+    #[Route('/property-details', name: 'details')]
+    public function propertyDetails(){
+        return $this->render('properties/propertyDetails.html.twig', []);
+    }
+
 }

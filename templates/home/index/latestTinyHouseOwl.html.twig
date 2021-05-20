@@ -1,5 +1,7 @@
 <div class="properties-listing spacer">
-  <a href="buysalerent.php" class="pull-right viewall">View All Listing</a>
+  <a href="{{ path('properties') }}" class="pull-right viewall"
+    >View All Listing</a
+  >
   <h2>Latest Tiny house added</h2>
   <div id="owl-example" class="owl-carousel">
     {% for property in properties %}
@@ -42,7 +44,7 @@
           >1</span
         >
       </div>
-      <a class="btn btn-primary" href="#">View Details</a>
+      <a class="btn btn-primary" href="{{ path('details') }}">View Details</a>
     </div>
     {% endfor %}
   </div>

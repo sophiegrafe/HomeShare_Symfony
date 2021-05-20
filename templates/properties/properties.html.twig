@@ -11,48 +11,8 @@
   <div class="properties-listing spacer">
     <div class="row">
       <div class="col-lg-3 col-sm-4">
+        <!-- search area-->
         {% include 'properties/properties-search-area.html.twig' %}
-
-        <div class="hot-properties hidden-xs">
-          <h4>Hot Properties</h4>
-          <div class="row">
-            <div class="col-lg-4 col-sm-5">
-              <img src="" class="img-responsive img-circle" alt="properties" />
-            </div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="#">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 col-sm-5">
-              <img src="" class="img-responsive img-circle" alt="properties" />
-            </div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="#">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-4 col-sm-5">
-              <img src="" class="img-responsive img-circle" alt="properties" />
-            </div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-4 col-sm-5">
-              <img src="" class="img-responsive img-circle" alt="properties" />
-            </div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="#">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -93,7 +53,7 @@
                 >
                 {% endfor %}
               </div>
-              <a class="btn btn-primary" href="#">View Details</a>
+              <a class="btn btn-primary" href="{{path('details')}}">View Details</a>
             </div>
           </div>
           {% endfor %}
