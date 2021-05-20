@@ -20,10 +20,19 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="{{ path('home') }}">Home</a></li>
-          <li><a href="{{ path('about') }}">About</a></li>
-          <li><a href="{{ path('blogposts') }}">Blogposts</a></li>
-          <li><a href="{{ path('properties') }}">Properties</a></li>
-          <li><a href="{{ path('contact') }}">Contact</a></li>
+          <li class="active"><a href="{{ path('about') }}">About</a></li>
+          <li class="active"><a href="{{ path('blogposts') }}">Blogposts</a></li>
+          <li class="active"><a href="{{ path('properties') }}">Properties</a></li>
+          <li class="active"><a href="{{ path('contact') }}">Contact</a></li>
+
+          {# adapt the navbar if the user is already connected #}
+          {% if not app.user %}
+          <li class="active dropdown-item"><a href='{{path ('app_register' )}}' >Sign Up</a></li>
+          <li class="active dropdown-item"><a href='{{path ('app_login' )}}' >Sign In</a></li>
+          {% else %}
+          <li><a href='{{path ('app_logout' )}}'>Log Out</a></li>
+          {% endif %}
+          
         </ul>
       </div>
       <!-- #Nav Ends -->

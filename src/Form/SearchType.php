@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 
-class SearchFormType extends AbstractType
+class SearchType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)

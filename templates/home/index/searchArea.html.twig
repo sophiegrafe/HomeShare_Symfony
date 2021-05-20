@@ -3,35 +3,12 @@
     <!-- banner search-->
     <h3>Looking for something ?</h3>
     <!-- search area-->
-    <div class="searchbar">
-      <div class="row">
-        <div class="col-lg-6 col-sm-6">
-          {{
-            form_start(form, {
-              action: path("home"),
-              method: "GET",
-              attr: { id: "ajaxStart" }
-            })
-          }}
-          <div class="row">
-            {#
-            <div class="col-lg-3 col-sm-3">
-              {{ form_row(form.capacity, {'attr': {'class': 'form-control'}}) }}
-            </div>
-            #}
-            <div class="col-lg-3 col-sm-4">
-              {{ form_row(form.country, {'attr': {'class': 'form-control'}}) }}
-            </div>
-            <div class="col-lg-3 col-sm-4">
-              {{ form_row(form.city, {'attr': {'class': 'form-control'}}) }}
-            </div>
-            <br />
-            <div class="col-lg-3 col-sm-4">
-              <button class="btn btn-success">Find Now</button>
-            </div>
-          </div>
-        </div>
-        {{ form_end(form) }}
+
+    <!-- here partial view from properties-->
+
+
+    <!-- search area-->
+    
         <div class="col-lg-5 col-lg-offset-1 col-sm-6">
           <p>Join now and get updated with all the properties deals.</p>
           <button

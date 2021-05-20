@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
-use App\Form\SearchFormType;
+use App\Form\SearchType;
 use App\Repository\PropertyRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ class PropertiesController extends AbstractController
     {
         $data = new SearchData();
         $form = $this->createForm(
-            SearchFormType::class,
+            SearchType::class,
             $data
         );
         $data->numeroPage = $request->get('page', 1);

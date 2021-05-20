@@ -38,7 +38,10 @@ class PropertyRepository extends ServiceEntityRepository
         ;
     }
 
-    
+
+    /**
+     * @return mixed Returns an array of Property objects
+     */
     public function getTinyHomeSearchResult(SearchData $data)
     {
         $isEnable = true;
@@ -65,11 +68,15 @@ class PropertyRepository extends ServiceEntityRepository
             ->setParameter('city', $data->city);
         }
 
+        if (!empty($data->capacity)) {
+            $reqQB = $reqQB->andWhere('p.capacity = :capacity')
+            ->setParameter('capacity', $data->capacity);
+        }
+
         $reqQB = $reqQB->andWhere('p.isEnable = :isEnable')
         ->setParameter('isEnable', $isEnable);
                 
-        $result =  $reqQB->getQuery();
-        // pourquoi pas $result =  $reqQB->getResult();
+        $result =  $reqQB->getQuery();        
 
         return $this->paginator->paginate(
             $result,

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %} {% block body %}
+<!-- banner -->
+<div class="inside-banner">
+  <div class="container">
+    <span class="pull-right"><a href="#">Home</a> / Register</span>
+    <h2>Register</h2>
+  </div>
+</div>
+<!-- banner -->
+{% for flashError in app.flashes('verify_email_error') %}
+<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+{% endfor %}
+<div class="container">
+  <div class="spacer">
+    {{ form_start(form, {'attr': {'id': 'register_form'}}) }}
+    <div class="row register">
+      <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+        {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder' : 'email@email.com'
+
+
+        }}) }}
+        {{ form_row(form.firstname, {'attr': {'class': 'form-control', 'placeholder' : 'Firstname'
+
+
+        }}) }}
+        {{ form_row(form.lastname, {'attr': {'class': 'form-control', 'placeholder' : 'Lastname'
+
+
+        }}) }}
+        {{ form_row(form.phone_number, {'attr': {'class': 'form-control', 'placeholder' : 'Phone Number'
+
+
+        }}) }} {{ form_row(form.country, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.city, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.pseudo, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.password, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form.agreeTerms) }}
+
+        <button type="submit" class="btn btn-success" name="Submit">
+          Register
+        </button>
+      </div>
+    </div>
+    {{ form_end(form) }}
+  </div>
+</div>
+{% endblock %}
