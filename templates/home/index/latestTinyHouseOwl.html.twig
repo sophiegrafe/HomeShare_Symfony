@@ -44,7 +44,11 @@
           >1</span
         >
       </div>
-      <a class="btn btn-primary" href="{{ path('details') }}">View Details</a>
+      <a
+        class="btn btn-primary"
+        href="{{ path('details', { id: property.id }) }}"
+        >View Details</a
+      >
     </div>
     {% endfor %}
   </div>

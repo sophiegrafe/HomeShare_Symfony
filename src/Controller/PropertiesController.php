@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
+use App\Entity\Property;
 use App\Form\SearchType;
 use App\Repository\PropertyRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,9 +42,9 @@ class PropertiesController extends AbstractController
             'tinyHomeResult' => $tinyHomeResult
         ]);
     }
-    #[Route('/property-details', name: 'details')]
-    public function propertyDetails(){
-        return $this->render('properties/propertyDetails.html.twig', []);
+    #[Route('/property-details/{id}', name: 'details')]
+    public function propertyDetails(Property $property){
+        return $this->render('properties/propertyDetails.html.twig', ['property' => $property]);
     }
 
 }

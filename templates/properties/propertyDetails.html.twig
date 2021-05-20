@@ -14,98 +14,25 @@
       <div class="col-lg-3 col-sm-4 hidden-xs"></div>
 
       
-        <h2>2 room and 1 kitchen apartment</h2>
+        <h2>{{property.title}}</h2>
         <div class="row">
           <div class="col-lg-8">
-            <div class="property-images">
-              <!-- Slider Starts -->
-              <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators hidden-xs">
-                  <li
-                    data-target="#myCarousel"
-                    data-slide-to="0"
-                    class="active"
-                  ></li>
-                  <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                  <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                  <li data-target="#myCarousel" data-slide-to="3" class=""></li>
-                </ol>
-                <div class="carousel-inner">
-                  <!-- Item 1 -->
-                  <div class="item active">
+            <div class="property-images">              
                     <img
-                      src="../../assets/img/properties/tiny-house-1.jpg"
+                      src="../../{{property.photo}}"
                       class="properties"
                       alt="properties"
-                    />
-                  </div>
-                  <!-- #Item 1 -->
-
-                  <!-- Item 2 -->
-                  <div class="item">
-                    <img
-                      src="../../assets/img/properties/tiny-house-12.jpg"
-                      class="properties"
-                      alt="properties"
-                    />
-                  </div>
-                  <!-- #Item 2 -->
-
-                  <!-- Item 3 -->
-                  <div class="item">
-                    <img
-                      src="../../assets/img/properties/tiny-house-5.jpg"
-                      class="properties"
-                      alt="properties"
-                    />
-                  </div>
-                  <!-- #Item 3 -->
-
-                  <!-- Item 4 -->
-                  <div class="item">
-                    <img
-                      src="../../assets/img/properties/tiny-house-6.jpg"
-                      class="properties"
-                      alt="properties"
-                    />
-                  </div>
-                  <!-- # Item 4 -->
-                </div>
-                <a
-                  class="left carousel-control"
-                  href="#myCarousel"
-                  data-slide="prev"
-                  ><span class="glyphicon glyphicon-chevron-left"></span
-                ></a>
-                <a
-                  class="right carousel-control"
-                  href="#myCarousel"
-                  data-slide="next"
-                  ><span class="glyphicon glyphicon-chevron-right"></span
-                ></a>
-              </div>
-              <!-- #Slider Ends -->
+                    />                  
             </div>
 
             <div class="spacer">
               <h4>
-                <span class="glyphicon glyphicon-th-list"></span> Properties
-                Detail
+                <span class="glyphicon glyphicon-th-list"></span> Property
+                Details
               </h4>
               <p>
-                Efficiently unleash cross-media information without cross-media
-                value. Quickly maximize timely deliverables for real-time
-                schemas. Dramatically maintain clicks-and-mortar solutions
-                without functional solutions.
-              </p>
-              <p>
-                Completely synergize resource sucking relationships via premier
-                niche markets. Professionally cultivate one-to-one customer
-                service with robust ideas. Dynamically innovate
-                resource-leveling customer service for state of the art customer
-                service
-              </p>
+                {{property.longDescription}}
+              </p>              
             </div>
             <div>
               <h4>
@@ -126,21 +53,20 @@
           </div>
           <div class="col-lg-4">
             <div class="col-lg-12 col-sm-6">
-              <div class="property-info">
-                <p class="price">$ 200,000,000</p>
-                <p class="area">
-                  <span class="glyphicon glyphicon-map-marker"></span> 344
-                  Villa, Syndey, Australia
-                </p>
+                <div class="property-info">
+                    <p class="price">$ 200,000,000</p>
+                    <p class="area">
+                    <span class="glyphicon glyphicon-map-marker"></span>{{property.city}}
+                    </p>
 
-                <div class="profile">
-                  <span class="glyphicon glyphicon-user"></span> Agent Details
-                  <p>John Parker<br />009 229 2929</p>
+                    <div class="profile">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {# <p>{{property.owner}}</p> #}
+                    </div>
                 </div>
-              </div>
 
               <h6>
-                <span class="glyphicon glyphicon-home"></span> Availabilty
+                <span class="glyphicon glyphicon-home"></span>Available
               </h6>
               <div class="listing-detail">
                 <span
