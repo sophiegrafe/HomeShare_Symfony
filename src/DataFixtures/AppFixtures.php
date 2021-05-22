@@ -128,7 +128,7 @@ class AppFixtures extends Fixture
                 ->setCity($city0)
                 ->setCountry($country0)
                 ->setPhoneNumber($faker->phoneNumber())
-                ->setRoles(['ROLE_USER']);
+                ->setRoles(['ROLE_OWNER']);
             // Generate a hashed password
             $password = $this->encoder->encodePassword($owner, 'password');
             $owner->setPassword($password);
@@ -260,7 +260,7 @@ class AppFixtures extends Fixture
                          ->setCity($city)
                          ->setCountry($country)
                          ->setPhoneNumber($faker->phoneNumber())
-                         ->setRoles(['ROLE_USER', 'ROLE_OWNER']);
+                         ->setRoles(['ROLE_OWNER']);
                     // Generate a hashed password
                     $password = $this->encoder->encodePassword($owner, 'password');
                     $owner->setPassword($password);
