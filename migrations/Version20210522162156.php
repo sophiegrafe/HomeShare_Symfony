@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210518152431 extends AbstractMigration
+final class Version20210522162156 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add country and city in Address  - User - Property for the searchArea';
+        return '';
     }
 
     public function up(Schema $schema): void
