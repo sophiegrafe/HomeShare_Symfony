@@ -74,7 +74,7 @@ class Property
 
 
     /**
-     * @Vich\UploadableField(mapping="property_photos", fileNameProperty="photo")
+     * @Vich\UploadableField(mapping="photos", fileNameProperty="photo")
      * @var File
      */
     private $photoFile;
@@ -252,18 +252,24 @@ class Property
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPhotoFile()
     {
         return $this->photoFile;
     }
     
+    /**
+     * @param mixed $photoFile
+     */
     public function setPhotoFile(File $photo = null)
     {
         $this->photoFile = $photo;

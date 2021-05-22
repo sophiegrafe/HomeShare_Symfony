@@ -121,18 +121,24 @@ class Blogpost
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPhotoFile()
     {
         return $this->photoFile;
     }
 
+    /**
+     * @param mixed $photoFile
+     */
     public function setPhotoFile(File $photo = null)
     {
         $this->photoFile = $photo;
