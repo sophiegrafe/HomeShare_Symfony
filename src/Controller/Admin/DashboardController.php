@@ -22,7 +22,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('TinyHomeShare');
+            ->setTitle('TinyHomeShare');            
     }
 
     public function configureMenuItems(): iterable
