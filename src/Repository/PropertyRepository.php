@@ -46,7 +46,8 @@ class PropertyRepository extends ServiceEntityRepository
     {
         $isEnable = true;
         $reqQB = $this->createQueryBuilder('p')
-            ->select(                
+            ->select( 
+                'p.id',               
                 'p.isEnable',
                 'p.photo',
                 'p.title',
