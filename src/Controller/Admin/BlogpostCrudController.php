@@ -11,7 +11,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Symfony\Component\Security\Core\Security;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
 class BlogpostCrudController extends AbstractCrudController
 {
@@ -23,23 +25,37 @@ class BlogpostCrudController extends AbstractCrudController
     //customize the form area and the board
     public function configureFields(string $pageName): iterable
     {
+        //to upload the image file
+        $photoFile = TextField::new(propertyName: 'photoFile')
+                        ->setFormType(formTypeFqcn: VichImageType::class);                       
+                        
+        //to set the path for the miniarture on the Blogpost board
+        $photo = ImageField::new(propertyName: 'photo')
+                        ->setBasePath(path: '/uploads/blogposts');                        
         
-        return [
-            TextField::new('title'),
+        $fields = [
+            TextField::new(propertyName: 'title'),
+            TextEditorField::new(propertyName: 'content'),
             // to see the slug on the board but not in the form
-            TextareaField::new('content'),
-            TextField::new('photoFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
-            //this field set the miniarture on the Blogpost board
-            ImageField::new('photo')->setBasePath('/uploads/blogposts/')->onlyOnIndex(),
-            SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),            
-            DateField::new('createdDate')->hideOnForm(),
-            AssociationField::new('user')->hideOnForm(),
-
-            /* this one is problematic, need to set the city in crud but need a prior traitement to allow a string in 'create new blogpost' then persiste the id attach to the string in City table.
-            --> SOLUTION !!! --> add a magic function in the associate entity __toString () wich return a string, for exemples the name, title, label, etc, of this entity.  
-            */
+            SlugField::new(propertyName: 'slug')
+                ->setTargetFieldName('title')
+                ->hideOnIndex(),
+            DateField::new(propertyName: 'createdDate')
+                ->hideOnForm(),
+            AssociationField::new(propertyName: 'user')
+                ->hideOnForm(),
+            
+            /*add a magic function in the associate entity : __toString () wich return a string, for exemples the name, title, label, etc, of this entity.*/
             AssociationField::new('city'),
         ];
+
+        if ($pageName == Crud::PAGE_INDEX || $pageName == Crud::PAGE_DETAIL){
+            $fields[] = $photo;
+        } else {
+            $fields[] = $photoFile;
+        }
+
+        return $fields;
     }
 
     // sort the blogpost list
