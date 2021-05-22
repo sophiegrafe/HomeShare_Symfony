@@ -44,7 +44,7 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }         - 
          - { path: ^/profil, roles: ROLE_USER }
 
-    # A owner has a user role and a 
+    # A owner has a user role and an admin has a owner role
     role_hierarchy:
         ROLE_OWNER: ROLE_USER
         ROLE_ADMIN: ROLE_OWNER
