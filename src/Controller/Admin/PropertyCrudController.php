@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Address;
 use App\Entity\Property;
+use App\Form\AddressType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -24,9 +26,9 @@ class PropertyCrudController extends AbstractCrudController
     }
 
     public function configureFields(string $pageName): iterable
-    {
-        return [
-            TextField::new('title'),            
+    {        
+        $fields = [
+            TextField::new('title'),
             TextEditorField::new('shortDescription'),
             TextEditorField::new('longDescription'),
             NumberField::new('capacity'),
@@ -36,13 +38,17 @@ class PropertyCrudController extends AbstractCrudController
             SlugField::new('slug')->setTargetFieldName('title')->hideOnIndex(),
             TextField::new('photoFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
             //this field set the miniarture on the Properties board
-            ImageField::new('photo')->setBasePath('/uploads/properties/')->onlyOnIndex(),            
-            DateField::new('createdDate')->hideOnForm(), 
-            AssociationField::new('address'),
+            ImageField::new('photo')->setBasePath('/uploads/properties/')->onlyOnIndex(),
+            DateField::new('createdDate')->hideOnForm(),
             AssociationField::new('owner')->hideOnForm(),
-            // New type of field available with easyadmin v3, but does not work yet --> need bugfix 
-            // ImageField::new('photo')->setBasePath('/uploads/properties/')->setUploadDir('public/uploads/properties/')->setFormType(FileUploadType::class),
+            TextField::new('number')->setFormType(AddressType::class)->onlyWhenCreating(),
+            TextField::new('street')->setFormType(AddressType::class)->onlyWhenCreating(),
+            TextField::new('zipcode')->setFormType(AddressType::class)->onlyWhenCreating(),
+            AssociationField::new('country'),
+            AssociationField::new('city'),
+            AssociationField::new('address'),            
         ];
+        return $fields;
     }
 
     public function configureCrud(Crud $crud): Crud

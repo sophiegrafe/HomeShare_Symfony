@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %} {% block body %}
+<!-- banner -->
+<div class="inside-banner">
+  <div class="container">
+    <span class="pull-right"><a href="#">Home</a> / Register</span>
+    <h2>Add a New Property</h2>
+  </div>
+</div>
+<!-- banner -->
+
+<div class="container">
+  <div class="spacer">
+    {{ form_start(Propertyform, {'attr': {'id': 'addProperty_form'}}) }}
+    <div class="row register">
+      <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+        {{ form_row(Propertyform.title, {'attr': {'class': 'form-control', 'placeholder' : 'Title'
+
+
+
+
+        }}) }}
+        {{ form_row(Propertyform.shortDescription, {'attr': {'class': 'form-control', 'placeholder' : 'Short description of the property'
+
+
+
+
+        }}) }}
+        {{ form_row(Propertyform.longDescription, {'attr': {'class': 'form-control', 'placeholder' : 'Detailed description of the property'
+
+
+
+
+        }}) }}
+        {{ form_row(Propertyform.capacity, {'attr': {'class': 'form-control', 'placeholder' : 'Capacity'
+
+
+
+
+        }}) }}
+        {{ form_row(Propertyform.nbBathroom, {'attr': {'class': 'form-control'
+
+
+
+
+        }})}}
+        {{ form_row(Propertyform.nbWc, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(Propertyform.isEnable, {'attr': {'class': 'form-control'}})
+        }} {{ form_row(Propertyform.city, {'attr': {'class': 'form-control'}})}}
+        {{ form_row(Propertyform.country, {'attr': {'class': 'form-control'}})}}
+        {{ form_row(Propertyform.photoFile, {'attr': {'class': 'form-control'
+        }})}}
+
+        <button type="submit" class="btn btn-success" name="Submit">
+          property
+        </button>
+      </div>
+    </div>
+    {{ form_end(Propertyform) }}
+  </div>
+</div>
+{% endblock %}

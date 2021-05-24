@@ -19,6 +19,19 @@ class AddressRepository extends ServiceEntityRepository
         parent::__construct($registry, Address::class);
     }
 
+    /**
+     * @return Address[] Returns an array of Address objects
+     */
+
+    public function getLastEntry()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(2)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Address[] Returns an array of Address objects
     //  */

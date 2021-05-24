@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %} {% block body %}
+<!-- banner -->
+<div class="inside-banner">
+  <div class="container">
+    <span class="pull-right"><a href="#">Home</a> / Register</span>
+    <h2>Add a New Property</h2>
+    <h3>Step 1 set the address of the property</h3>
+  </div>
+</div>
+<!-- banner -->
+
+<div class="container">
+  <div class="spacer">
+    {{ form_start(Addressform, {'attr': {'id': 'addProperty_form'}}) }}
+    <div class="row register">
+      <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+        {{ form_row(Addressform.number, {'attr': {'class': 'form-control', 'placeholder' : 'Number'
+        }}) }}
+        {{ form_row(Addressform.street, {'attr': {'class': 'form-control', 'placeholder' : 'Street'
+        }}) }}
+        {{ form_row(Addressform.zipcode, {'attr': {'class': 'form-control', 'placeholder' : 'Detailed description of the property'
+        }}) }}
+        {{ form_row(Addressform.city, {'attr': {'class': 'form-control'}})}}
+        {{ form_row(Addressform.country, {'attr': {'class': 'form-control'}})}}
+        <button type="submit" class="btn btn-success" name="Submit">
+          Step 2 !
+        </button>
+      </div>
+    </div>
+    {{ form_end(Addressform) }}
+  </div>
+</div>
+{% endblock %}
