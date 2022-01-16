@@ -1,44 +1,41 @@
-# HomeShare_Symfony
+# TinyHome_Symfony
 
-This site is a project that I work on to learn and practice the basics of Symfony 5.
+This website is a project I've worked on to learn and practice the basics of Symfony 5.
 
-I will build a site allowing properties's owners to share their house or appartment, for holidays, weekend, or else.
+It's supposed to allow owners and makers of unusual home space to share with us their choices and ways they live with them daily.
 
-In order to focus on the technical part of the project, I will follow the specifications sheet provided in an other course. 
+In order to focus on the technical part of the project, I followed the specifications sheet provided in an other course. 
 
-## Environement de développement
+## Dev env
 
-### Pré-requis
+### require
 
 * PHP 7.4
 * Composer
 * Symfony CLI
 * npm
   
-Vous pouvez vérifier les prérequis avec la commande suivante (de la CLI Symfony)
 
+### check requirements
 ```bash
 symfony check:requirements
 ```
-### Lancer l'environement de développement
+## launch the app
 
 ```bash
-
 composer install
 symfony console doctrine:database:create
 symfony console make:migration
 symfony console doctrine:migration:migrate
 symfony console doctrine:fixtures:load
 symfony server:start
-
 ```
  
-## Lancer les tests
-
+## launch the tests
 ```bash
 php bin/phpunit --testdox
 ```
-## Vérifier la couverture de test
+## check test coverage
 
 ```bash
 XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-html var/log/test/test-coverage
