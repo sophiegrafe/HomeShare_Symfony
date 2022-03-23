@@ -1,11 +1,5 @@
 # TinyHome_Symfony
 
-This website is a project I've worked on to learn and practice the basics of Symfony 5.
-
-It's supposed to allow owners and makers of unusual home space to share with us their choices and ways they live with them daily.
-
-In order to focus on the technical part of the project, I followed the specifications sheet provided in an other course. 
-
 ## Dev env
 
 ### require
