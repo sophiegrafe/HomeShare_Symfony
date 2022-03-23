@@ -14,6 +14,7 @@
 ```bash
 symfony check:requirements
 ```
+
 ## launch the app
 
 ```bash
@@ -26,11 +27,19 @@ symfony server:start
 ```
  
 ## launch the tests
+
 ```bash
 php bin/phpunit --testdox
 ```
+
 ## check test coverage
 
 ```bash
 XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-html var/log/test/test-coverage
+```
+
+## trello board
+
+```bash
+https://trello.com/b/gubdwCZp/projet-perso-symfo
 ```
